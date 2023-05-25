@@ -18,6 +18,7 @@ def create_db():
 
         # Создание обьекта Курсор
         with connection.cursor() as cursor:
+            # Создание таблицы users
             cursor.execute(
                 """CREATE TABLE users(
                 id serial PRIMARY KEY,

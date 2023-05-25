@@ -22,6 +22,7 @@ def registration():
         # Создание обьекта Курсор
         with connection.cursor() as cursor:
             connection.autocommit = True
+            # Регистрация нового пользователя
             f_name = input('First name: > ')
             l_name = input('Last name: > ')
             mail = input('E-mail: > ')
