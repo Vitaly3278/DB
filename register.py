@@ -4,10 +4,10 @@ from config import host, user, password, db_name, port
 
 def registration():
     print('=' * 20)
-    # f_name = input('First name: > ')
-    # l_name = input('Last name: > ')
-    # mail = input('E-mail: > ')
-    # pas = input('Password: > ')
+    f_name = input('First name: > ')
+    l_name = input('Last name: > ')
+    mail = input('E-mail: > ')
+    pas = input('Password: > ')
 
     try:
         # Соединение с базой данных
@@ -23,13 +23,11 @@ def registration():
         with connection.cursor() as cursor:
             connection.autocommit = True
             # Регистрация нового пользователя
-            f_name = input('First name: > ')
-            l_name = input('Last name: > ')
-            mail = input('E-mail: > ')
-            pas = input('Password: > ')
-            cursor.execute(""" INSERT INTO users(first_name, last_name, e_mail, password) 
-            VALUES (f_name, l_name, mail, pas);"""
-                           )
+            insert_query = """INSERT INTO users(first_name, last_name, e_mail, password)
+                                          VALUES (%s, %s, %s, %s)"""
+
+            item_tuple = (f_name, l_name, mail, pas)
+            cursor.execute(insert_query, item_tuple)
 
             print('[INFO] USER created successfully')
 
@@ -41,4 +39,4 @@ def registration():
             print('[INFO] PostgreSQL connection close')
 
 
-registration()
+#registration()
