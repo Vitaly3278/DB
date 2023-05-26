@@ -2,7 +2,9 @@ import psycopg2
 from config import host, user, password
 
 
-def list_db():
+def del_users():
+    print('=' * 20)
+    user_e_mail = input('INPUT DELETED E-mail: > ')
     try:
         # Соединение с базой данных
 
@@ -16,16 +18,13 @@ def list_db():
         # Создание обьекта Курсор
         with connection.cursor() as cursor:
             connection.autocommit = True
-            # Выборка всех пользователей
-            select_query = "SELECT * from users"
+            # Удаление пользователя по e-mail
 
-            # item_tuple = (user_mail, user_password)
-            cursor.execute(select_query)
+            postgresql_delete_query = "DELETE FROM users WHERE e_mail=%s"
 
-            for person in cursor.fetchall():
-                print(f'ID = {person[0]}\nFirst name = {person[1]}\n'
-                      f'Last name = {person[2]}\ne-mail = {person[3]}\npassword = {person[4]}')
-                print('-' * 20)
+            cursor.execute(postgresql_delete_query, (user_e_mail,))
+            count = cursor.rowcount
+            print(f'[INFO] {count} USER {user_e_mail} DELETED')
 
     except Exception as ex:
         print('[INFO] Error while working with PostgreSQL', ex)

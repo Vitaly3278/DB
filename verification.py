@@ -1,6 +1,7 @@
 import psycopg2
 from config import host, user, password
 
+
 def verification():
     print('=' * 20)
     user_e_mail = input('E-mail: > ')
@@ -24,7 +25,7 @@ def verification():
 
             cursor.execute(postgresql_select_query, (user_e_mail, user_password))
             mobile_records = cursor.fetchall()
-            if len(mobile_records) >0:
+            if len(mobile_records) > 0:
                 for row in mobile_records:
                     print(row)
             else:

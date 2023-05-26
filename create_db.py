@@ -3,17 +3,14 @@ from config import host, user, password
 
 
 def create_db():
-
-
     try:
         # Соединение с базой данных
-
 
         connection = psycopg2.connect(
             host=host,
             user=user,
             password=password
-            )
+        )
 
         # Создание обьекта Курсор
         with connection.cursor() as cursor:
@@ -36,4 +33,3 @@ def create_db():
         if connection:
             connection.close()
             return ('[INFO] PostgreSQL connection close')
-
