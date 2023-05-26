@@ -3,11 +3,11 @@ from config import host, user, password, db_name, port
 
 
 def registration():
-    print('=' * 20)
-    f_name = input('First name: > ')
-    l_name = input('Last name: > ')
-    mail = input('E-mail: > ')
-    pas = input('Password: > ')
+    print('=' * 25)
+    user_first_name = input('First name: > ')
+    user_last_name = input('Last name: > ')
+    user_mail = input('E-mail: > ')
+    user_password = input('Password: > ')
 
     try:
         # Соединение с базой данных
@@ -26,7 +26,7 @@ def registration():
             insert_query = """INSERT INTO users(first_name, last_name, e_mail, password)
                                           VALUES (%s, %s, %s, %s)"""
 
-            item_tuple = (f_name, l_name, mail, pas)
+            item_tuple = (user_first_name, user_last_name, user_mail, user_password)
             cursor.execute(insert_query, item_tuple)
 
             print('[INFO] USER created successfully')
@@ -39,4 +39,4 @@ def registration():
             print('[INFO] PostgreSQL connection close')
 
 
-#registration()
+

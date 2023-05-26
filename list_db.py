@@ -1,11 +1,8 @@
 import psycopg2
 from config import host, user, password
 
-def verification():
-    print('=' * 20)
-    user_e_mail = input('E-mail: > ')
-    user_password = input('Password: > ')
 
+def list_db():
     try:
         # Соединение с базой данных
 
@@ -19,14 +16,16 @@ def verification():
         # Создание обьекта Курсор
         with connection.cursor() as cursor:
             connection.autocommit = True
-            # Регистрация нового пользователя
-            select_query = "SELECT e_mail, password from users"
+            # Выборка всех пользователей
+            select_query = "SELECT * from users"
 
             # item_tuple = (user_mail, user_password)
             cursor.execute(select_query)
 
             for person in cursor.fetchall():
-                print(f"{person[0]} - {person[1]}")
+                print(f'ID = {person[0]}\nFirst name = {person[1]}\n'
+                      f'Last name = {person[2]}\ne-mail = {person[3]}\npassword = {person[4]}')
+                print('-' * 45)
 
     except Exception as ex:
         print('[INFO] Error while working with PostgreSQL', ex)

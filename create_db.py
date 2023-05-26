@@ -1,5 +1,5 @@
 import psycopg2
-from config import host, user, password, db_name, port
+from config import host, user, password
 
 
 def create_db():
@@ -12,9 +12,8 @@ def create_db():
         connection = psycopg2.connect(
             host=host,
             user=user,
-            password=password,
-            port=port
-        )
+            password=password
+            )
 
         # Создание обьекта Курсор
         with connection.cursor() as cursor:
@@ -38,4 +37,3 @@ def create_db():
             connection.close()
             return ('[INFO] PostgreSQL connection close')
 
-#print(create_db())
