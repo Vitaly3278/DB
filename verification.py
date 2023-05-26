@@ -19,14 +19,17 @@ def verification():
         # Создание обьекта Курсор
         with connection.cursor() as cursor:
             connection.autocommit = True
-            # Регистрация нового пользователя
-            select_query = "SELECT e_mail, password from users"
 
-            # item_tuple = (user_mail, user_password)
-            cursor.execute(select_query)
+            postgresql_select_query = "select * from users where e_mail=%s and password = %s"
 
-            for person in cursor.fetchall():
-                print(f"{person[0]} - {person[1]}")
+            cursor.execute(postgresql_select_query, (user_e_mail, user_password))
+            mobile_records = cursor.fetchall()
+            if len(mobile_records) >0:
+                for row in mobile_records:
+                    print(row)
+            else:
+                print('[INFO] NOT FOUND')
+
 
     except Exception as ex:
         print('[INFO] Error while working with PostgreSQL', ex)
