@@ -1,11 +1,17 @@
 import psycopg2
 from config import host, user, password
-
+import json
 
 def verification():
-    print('=' * 20)
-    user_e_mail = input('E-mail: > ')
-    user_password = input('Password: > ')
+
+    with open('json.json', 'r', encoding='utf-8') as f:  # открыли файл с данными
+        text = json.load(f)
+        user_e_mail = text['email']
+        user_password = text['password']
+        print(user_e_mail)
+    # print('=' * 20)
+    # user_e_mail = input('E-mail: > ')
+    # user_password = input('Password: > ')
 
     try:
         # Соединение с базой данных
@@ -35,6 +41,4 @@ def verification():
     except Exception as ex:
         print('[INFO] Error while working with PostgreSQL', ex)
     finally:
-        if connection:
-            connection.close()
-            print('[INFO] PostgreSQL connection close')
+        print('[INFO] PostgreSQL connection close')

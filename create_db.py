@@ -18,8 +18,6 @@ def create_db():
             cursor.execute(
                 """CREATE TABLE users(
                 id serial PRIMARY KEY,
-                first_name varchar(50) NOT NULL,
-                last_name varchar(50) NOT NULL,
                 e_mail varchar(50) NOT NULL,
                 password varchar(50) NOT NULL
                 );"""
@@ -30,6 +28,4 @@ def create_db():
     except Exception as ex:
         print('[INFO] Error while working with PostgreSQL', ex)
     finally:
-        if connection:
-            connection.close()
-            return ('[INFO] PostgreSQL connection close')
+        print ('[INFO] PostgreSQL connection close')

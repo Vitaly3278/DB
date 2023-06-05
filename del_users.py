@@ -29,6 +29,4 @@ def del_users():
     except Exception as ex:
         print('[INFO] Error while working with PostgreSQL', ex)
     finally:
-        if connection:
-            connection.close()
-            print('[INFO] PostgreSQL connection close')
+        print('[INFO] PostgreSQL connection close')

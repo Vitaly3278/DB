@@ -23,13 +23,10 @@ def list_db():
             cursor.execute(select_query)
 
             for person in cursor.fetchall():
-                print(f'ID = {person[0]}\nFirst name = {person[1]}\n'
-                      f'Last name = {person[2]}\ne-mail = {person[3]}\npassword = {person[4]}')
+                print(f'ID = {person[0]}\ne-mail = {person[3]}\npassword = {person[4]}')
                 print('-' * 20)
 
     except Exception as ex:
         print('[INFO] Error while working with PostgreSQL', ex)
     finally:
-        if connection:
-            connection.close()
-            print('[INFO] PostgreSQL connection close')
+        print('[INFO] PostgreSQL connection close')
