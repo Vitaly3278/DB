@@ -27,13 +27,13 @@ def verification():
         with connection.cursor() as cursor:
             connection.autocommit = True
 
-            postgresql_select_query = "select * from users where e_mail=%s and password = %s"
+            postgresql_select_query = "select * from board_users where e_mail=%s and password = %s"
 
             cursor.execute(postgresql_select_query, (user_e_mail, user_password))
             mobile_records = cursor.fetchall()
             if len(mobile_records) > 0:
-                for row in mobile_records:
-                    print(row)
+                print('Hello')
+
             else:
                 print('[INFO] NOT FOUND')
 

@@ -1,10 +1,10 @@
 import psycopg2
-from config import host, user, password, db_name, port
+from config import host, user, password, database, port
 
 
 def registration():
     print('=' * 25)
-    # user_first_name = input('First name: > ')
+    user_first_name = input('First name: > ')
     # user_last_name = input('Last name: > ')
     user_mail = input('E-mail: > ')
     user_password = input('Password: > ')
@@ -16,17 +16,18 @@ def registration():
             host=host,
             user=user,
             password=password,
-            port=port
+            port=port,
+            database=database
         )
 
         # Создание обьекта Курсор
         with connection.cursor() as cursor:
             connection.autocommit = True
             # Регистрация нового пользователя
-            insert_query = """INSERT INTO users(e_mail, password)
-                                          VALUES (%s, %s)"""
+            insert_query = """INSERT INTO scrumrun(password, username, email)
+                                          VALUES (%s, %s, %s)"""
 
-            item_tuple = (user_mail, user_password)
+            item_tuple = (user_password, user_first_name, user_mail)
             cursor.execute(insert_query, item_tuple)
 
             print('[INFO] USER created successfully')
